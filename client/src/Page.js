@@ -85,8 +85,8 @@ export default function Page() {
 <p>Distance:{minDist} km</p>
 <br></br>
 <h3>Maximun Velocity</h3>
-<p>Astroid id: {maxId} km/sec</p>
-<p>Velocity:{maxSpeed} </p>
+<p>Astroid id: {maxId} </p>
+<p>Velocity:{maxSpeed} km/sec </p>
 <br></br>
 <h3>Average Size :{avgSize}</h3>
 
