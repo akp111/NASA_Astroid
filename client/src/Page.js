@@ -19,7 +19,11 @@ export default function Page() {
   const classes = useStyles();
     const [start_date, setstart] = useState(new Date())
     const [end_date, setend] = useState(new Date())
-    const [output, setoutput] = useState(null)
+    const [minDist, setMinDist] = useState(null)
+    const [minId, setminId] = useState(null)
+    const [maxId, setmaxId] = useState(null)
+    const [maxSpeed, setmaxSpeed] = useState(null)
+    const [avgSize, setavgSize] = useState(null)
   return (
       <div>
     <form className={classes.container} noValidate>
@@ -60,11 +64,15 @@ export default function Page() {
         console.log(requestOptions)
         fetch('http://localhost:4000/', requestOptions).then(
            fetch('http://localhost:4000/output').then(
-               res=> res.text()).then(
-                   (res)=>{
+               res=> res.text()).then((res)=>{
                        var k=JSON.parse(res)[0]
                        console.log(k)
-                       setoutput(JSON.stringify(k))
+                       setMinDist(k.minDist)
+                       setminId(k.minDistId)
+                       setmaxSpeed(k.maxSpeed)
+                       setmaxId(k.maxSpeedId)
+                       setavgSize(k.avgerageSize)
+
                 }
                
            
@@ -72,16 +80,16 @@ export default function Page() {
     
     }}
   >Submit</button>
-  {/* <h3>Minimum Distance</h3>
-<p>Astroid id: {output.minDistId} </p>
-<p>Distance:{output.minDist} km</p>
+  <h3>Minimum Distance</h3>
+<p>Astroid id: {minId} </p>
+<p>Distance:{minDist} km</p>
 <br></br>
 <h3>Maximun Velocity</h3>
-<p>Astroid id: {output.maxSpeedId} km/sec</p>
-<p>Velocity:{output.maxSpeed} </p>
+<p>Astroid id: {maxId} km/sec</p>
+<p>Velocity:{maxSpeed} </p>
 <br></br>
-<h3>Average Size :{output.avgerageSize}</h3> */}
-<h3>{output}</h3>
+<h3>Average Size :{avgSize}</h3>
+
 
 
   </div>
