@@ -19,7 +19,7 @@ export default function Page() {
   const classes = useStyles();
     const [start_date, setstart] = useState(new Date())
     const [end_date, setend] = useState(new Date())
-    var output =null;
+    const [output, setoutput] = useState(null)
   return (
       <div>
     <form className={classes.container} noValidate>
@@ -58,15 +58,32 @@ export default function Page() {
             body: JSON.stringify({ start_date:start_date,end_date:end_date })
         };
         console.log(requestOptions)
-        fetch('http://localhost:4000/output', requestOptions).then((e)=>{
-            console.log(e)
-            output.push(e)
-        }
-        )
+        fetch('http://localhost:4000/', requestOptions).then(
+           fetch('http://localhost:4000/output').then(
+               res=> res.text()).then(
+                   (res)=>{
+                       var k=JSON.parse(res)[0]
+                       console.log(k)
+                       setoutput(JSON.stringify(k))
+                }
+               
+           
+        ))
     
     }}
   >Submit</button>
-  <p>{output}</p>
+  {/* <h3>Minimum Distance</h3>
+<p>Astroid id: {output.minDistId} </p>
+<p>Distance:{output.minDist} km</p>
+<br></br>
+<h3>Maximun Velocity</h3>
+<p>Astroid id: {output.maxSpeedId} km/sec</p>
+<p>Velocity:{output.maxSpeed} </p>
+<br></br>
+<h3>Average Size :{output.avgerageSize}</h3> */}
+<h3>{output}</h3>
+
+
   </div>
   );
 }
